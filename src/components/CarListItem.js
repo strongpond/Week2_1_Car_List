@@ -1,20 +1,22 @@
 import react from "react";
 import styled from "styled-components";
 
-const CarListItem = () => {
+const CarListItem = ({ brand, name, fuelType, segment, imageUrl, amount }) => {
   return (
     <ItemWrapper>
       <DescBox>
         <ItemTitleBox>
-          <ItemBrand>기아</ItemBrand>
-          <ItemName>EV6</ItemName>
+          <ItemBrand>{brand}</ItemBrand>
+          <ItemName>{name}</ItemName>
         </ItemTitleBox>
         <ItemDescBox>
-          <ItemType>중형 / 전기</ItemType>
-          <ItemAmount>월 600,000 원 부터</ItemAmount>
+          <ItemType>
+            {segment} / {fuelType}
+          </ItemType>
+          <ItemAmount>월 {amount} 원 부터</ItemAmount>
         </ItemDescBox>
       </DescBox>
-      <ImageBox>이미지</ImageBox>
+      <ImageBox src={imageUrl} alt={name} />
     </ItemWrapper>
   );
 };
@@ -29,6 +31,10 @@ const ItemWrapper = styled.div`
   width: 390px;
   padding: 25px 20px;
   border-bottom: 1px solid black;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const DescBox = styled.div``;
@@ -59,10 +65,11 @@ const ItemAmount = styled.div`
   font-weight: 500;
 `;
 
-const ImageBox = styled.div`
+const ImageBox = styled.img`
   ${({ theme }) => theme.common.flexCenter};
   padding: 20px;
   height: 80px;
   width: 152px;
+  object-fit: cover;
   border: 1px solid black;
 `;
