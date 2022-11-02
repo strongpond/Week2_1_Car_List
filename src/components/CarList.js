@@ -21,15 +21,18 @@ const CarList = () => {
   return (
     <ListWrapper>
       {cars.map(data => {
+        const { id, attribute, amount } = data;
+        const { brand, name, fuelType, segment, imageUrl } = attribute;
+
         return (
           <CarListItem
-            key={data.id}
-            brand={data.attribute.brand}
-            name={data.attribute.name}
-            fuelType={data.attribute.fuelType}
-            segment={data.attribute.segment}
-            imageUrl={data.attribute.imageUrl}
-            amount={data.amount}
+            key={id}
+            brand={brand}
+            name={name}
+            fuelType={fuelType}
+            segment={segment}
+            imageUrl={imageUrl}
+            amount={amount}
           />
         );
       })}
