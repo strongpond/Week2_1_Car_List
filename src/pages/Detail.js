@@ -1,14 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ImArrowLeft2 } from "react-icons/im";
 import styled from "styled-components";
 import { CAR_DESC as form } from "../data";
 import { ItemDesc } from "../components";
 
 const Detail = () => {
+  const navigate = useNavigate();
+
+  const goBackToCarList = async () => {
+    navigate("/");
+  };
+
   return (
     <Container>
       <Header>
-        <ImArrowLeft2 className="arrow" />
+        <ImArrowLeft2 className="arrow" onClick={goBackToCarList} />
         <Headline>차량상세</Headline>
       </Header>
       <ImageBox>이미지</ImageBox>
@@ -55,6 +62,10 @@ const Header = styled.div`
     left: 5%;
     top: 2.5%;
     color: ${({ theme }) => theme.colors.black};
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
