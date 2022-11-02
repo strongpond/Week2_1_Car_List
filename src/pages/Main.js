@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Main = () => {
   return (
     <Container>
-      <div>메인페이지</div>
+      <Box>메인페이지</Box>
     </Container>
   );
 };
@@ -12,7 +12,11 @@ const Main = () => {
 export default Main;
 
 const Container = styled.div`
-  ${({ theme }) => theme.flex("null", "center", "column")};
+  ${({ theme }) => theme.common.flexCenterColumn};
   height: 100vh;
   margin-top: 5%;
+`;
+
+const Box = styled.div`
+  color: ${({ theme }) => theme.colors.skyblue};
 `;
