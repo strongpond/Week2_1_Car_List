@@ -12,7 +12,12 @@ const Detail = () => {
 export default Detail;
 
 const Container = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   ${({ theme }) => theme.common.flexCenterColumn};
-  height: 100vh;
-  margin-top: 5%;
+  height: 800px;
+  width: 390px;
+  border: 1px solid black;
 `;
