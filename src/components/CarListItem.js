@@ -2,6 +2,27 @@ import react from "react";
 import styled from "styled-components";
 
 const CarListItem = ({ brand, name, fuelType, segment, imageUrl, amount }) => {
+  const segmentMap = {
+    C: "소형",
+    D: "중형",
+    E: "대형",
+    SUV: "SUV",
+  };
+
+  const executeSegment = segmentType => {
+    return segmentMap[segmentType];
+  };
+
+  const fuelMap = {
+    gasoline: "가솔린",
+    ev: "전기",
+    hybrid: "하이브리드",
+  };
+
+  const executeFuel = fuelType => {
+    return fuelMap[fuelType];
+  };
+
   return (
     <ItemWrapper>
       <DescBox>
@@ -11,7 +32,7 @@ const CarListItem = ({ brand, name, fuelType, segment, imageUrl, amount }) => {
         </ItemTitleBox>
         <ItemDescBox>
           <ItemType>
-            {segment} / {fuelType}
+            {executeSegment(segment)} / {executeFuel(fuelType)}
           </ItemType>
           <ItemAmount>월 {amount} 원 부터</ItemAmount>
         </ItemDescBox>
