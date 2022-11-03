@@ -1,12 +1,28 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { ImArrowLeft2 } from "react-icons/im";
 import styled from "styled-components";
+import { getCarList } from "../apis";
 import { CAR_DESC as form } from "../data";
 import { ItemDesc } from "../components";
 
 const Detail = () => {
+  const [desc, setDesc] = useState([]);
   const navigate = useNavigate();
+  let params = useParams();
+  const { id } = params;
+  const { amount, attribute } = desc;
+  //TODO: 구조분해 uncaught error ? debugger는 오류x
+  // const { brand, fuelType, imageUrl, name, segment } = attribute;
+
+  const getDesc = useCallback(async () => {
+    const result = await getCarList();
+    setDesc(result.data.payload.filter(e => e.id === Number(id))[0]);
+  }, []);
+
+  useEffect(() => {
+    getDesc();
+  }, [getDesc]);
 
   const goBackToCarList = async () => {
     navigate("/");
@@ -21,9 +37,9 @@ const Detail = () => {
       <ImageBox>이미지</ImageBox>
       <OverviewBox>
         <ItemBrand>현대</ItemBrand>
-        <ItemName>아반떼 CN7</ItemName>
+        <ItemName>아이오닉</ItemName>
       </OverviewBox>
-      <ItemAmount>월 600,000 원</ItemAmount>
+      <ItemAmount>월 {amount} 원</ItemAmount>
       {form.menu.map((e, i) => {
         return (
           <DescBox key={i}>
@@ -77,10 +93,9 @@ const Headline = styled.h1`
 
 const ImageBox = styled.div`
   ${({ theme }) => theme.common.flexCenter};
-  justify-content: center;
   height: 205px;
   width: 390px;
-  background-color: ${({ theme }) => theme.colors.grey};
+  object-fit: cover;
 `;
 
 const OverviewBox = styled.div`

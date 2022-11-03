@@ -28,7 +28,6 @@ const CarListItem = ({ id, brand, name, fuelType, segment, imageUrl, amount }) =
   const navigate = useNavigate();
 
   const goToDetail = selectId => {
-    console.log(selectId);
     navigate(`/detail/${selectId}`);
   };
 
