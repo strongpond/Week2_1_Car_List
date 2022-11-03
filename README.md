@@ -1,4 +1,4 @@
-# 폴더구조
+## 폴더구조
 
 ```
 📦src
@@ -28,7 +28,9 @@
  ┗ 📜index.js
 ```
 
-# 자주 쓰는 공동 테마 customizing
+## 활용코드
+
+### 자주 쓰는 공동 테마 customizing
 
 ```javascript
 //theme.js
@@ -70,7 +72,7 @@ const theme = {
 export default theme;
 ```
 
-### 활용 예시
+- 활용 예시
 ```javascript
 const Header = styled.div`
   ${({ theme }) => theme.common.flexCenter};
@@ -86,7 +88,7 @@ const Header = styled.div`
 
 <br />
 
-# type에 따른 한글 mapping
+### type에 따른 한글 mapping
 ```
 fuelType: "gasoline" | "hybrid" | "ev"
 segment: "C" | "D" | "E" | "SUV"
@@ -114,7 +116,7 @@ const segmentMap = {
     return fuelMap[fuelType];
   };
 ```
-### 활용 예시
+- 활용 예시
 ```javascript
 //CarListItem.js
   ...
