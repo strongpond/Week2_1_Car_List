@@ -124,3 +124,10 @@ const segmentMap = {
       {executeSegment(segment)} / {executeFuel(fuelType)}
   </ItemType>
 ```
+
+### TODO
+
+- 클릭이벤트(filter) + 버튼 애니메이션
+- 신규 뱃지 추가
+- SEO
+- 배포
