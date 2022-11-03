@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { getCarList } from "../apis";
 import CarListItem from "./CarListItem";
 
 const CarList = () => {
-  const navigate = useNavigate();
   const [cars, setCars] = useState([]);
 
   const getCars = useCallback(async () => {
@@ -27,6 +25,7 @@ const CarList = () => {
         return (
           <CarListItem
             key={id}
+            id={id}
             brand={brand}
             name={name}
             fuelType={fuelType}

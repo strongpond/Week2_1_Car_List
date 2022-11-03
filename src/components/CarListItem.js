@@ -1,7 +1,9 @@
 import react from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const CarListItem = ({ brand, name, fuelType, segment, imageUrl, amount }) => {
+const CarListItem = ({ id, brand, name, fuelType, segment, imageUrl, amount }) => {
+  //TODO: Mapping 함수 따로 분리하기
   const segmentMap = {
     C: "소형",
     D: "중형",
@@ -23,8 +25,15 @@ const CarListItem = ({ brand, name, fuelType, segment, imageUrl, amount }) => {
     return fuelMap[fuelType];
   };
 
+  const navigate = useNavigate();
+
+  const goToDetail = selectId => {
+    console.log(selectId);
+    navigate(`/detail/${selectId}`);
+  };
+
   return (
-    <ItemWrapper>
+    <ItemWrapper key={id} onClick={() => goToDetail(id)}>
       <DescBox>
         <ItemTitleBox>
           <ItemBrand>{brand}</ItemBrand>
