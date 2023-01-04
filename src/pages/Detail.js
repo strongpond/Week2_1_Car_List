@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ImArrowLeft2 } from "react-icons/im";
+import dayjs from "dayjs";
 import styled from "styled-components";
 import { getCarList } from "../apis";
-import { CAR_DESC as form } from "../data";
 import { ItemDesc } from "../components";
 
 const Detail = () => {
@@ -11,14 +11,15 @@ const Detail = () => {
   const navigate = useNavigate();
   let params = useParams();
   const { id } = params;
-  const { amount, attribute } = desc;
+  const { amount, attribute, insurance, additionalProducts, startDate } = desc;
   //TODO: 구조분해 uncaught error ? debugger는 오류x
-  // const { brand, fuelType, imageUrl, name, segment } = attribute;
-
+  const { brand, fuelType, imageUrl, name, segment } = attribute || {};
+  console.log(desc);
+  const date = dayjs(startDate, "YYYY-MM-DD HH:mm:ss");
   const getDesc = useCallback(async () => {
     const result = await getCarList();
     setDesc(result.data.payload.filter(e => e.id === Number(id))[0]);
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     getDesc();
@@ -28,19 +29,32 @@ const Detail = () => {
     navigate("/");
   };
 
+  const carDesc = [
+    {
+      name: "차량 정보",
+      lists: [
+        { name: "차종", description: segment },
+        { name: "연료", description: fuelType },
+        { name: "이용 가능일", description: date.format("YY년 MM월 DD일") },
+      ],
+    },
+    { name: "보험", lists: insurance },
+    { name: "추가상품", lists: additionalProducts },
+  ];
+
   return (
     <Container>
       <Header>
         <ImArrowLeft2 className="arrow" onClick={goBackToCarList} />
         <Headline>차량상세</Headline>
       </Header>
-      <ImageBox>이미지</ImageBox>
+      <ImageBox src={imageUrl} />
       <OverviewBox>
-        <ItemBrand>현대</ItemBrand>
-        <ItemName>아이오닉</ItemName>
+        <ItemBrand>{brand}</ItemBrand>
+        <ItemName>{name}</ItemName>
       </OverviewBox>
       <ItemAmount>월 {amount} 원</ItemAmount>
-      {form.menu.map((e, i) => {
+      {carDesc.map((e, i) => {
         return (
           <DescBox key={i}>
             <ItemTitle>{e.name}</ItemTitle>
@@ -59,8 +73,6 @@ const Container = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  ${({ theme }) => theme.common.flexCenterColumn};
-  height: 800px;
   width: 392px;
   border: 1px solid ${({ theme }) => theme.colors.black};
 `;
@@ -91,7 +103,7 @@ const Headline = styled.h1`
   font-weight: 700;
 `;
 
-const ImageBox = styled.div`
+const ImageBox = styled.img`
   ${({ theme }) => theme.common.flexCenter};
   height: 205px;
   width: 390px;

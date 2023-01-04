@@ -3,11 +3,11 @@ import styled from "styled-components";
 const ItemDesc = ({ lists }) => {
   return (
     <>
-      {lists.map(e => {
+      {lists?.map(e => {
         return (
           <DescWrapper>
-            <DescTitle>{e}</DescTitle>
-            <DescValue>a</DescValue>
+            <DescTitle>{e.name}</DescTitle>
+            <DescValue>{e.description || e.amount}</DescValue>
           </DescWrapper>
         );
       })}

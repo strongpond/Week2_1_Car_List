@@ -20,8 +20,6 @@ const Container = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  ${({ theme }) => theme.common.flexCenterColumn};
-  height: 800px;
   width: 390px;
   border: 1px solid black;
 `;
