@@ -12,9 +12,30 @@ const Detail = () => {
   let params = useParams();
   const { id } = params;
   const { amount, attribute, insurance, additionalProducts, startDate } = desc;
-  //TODO: 구조분해 uncaught error ? debugger는 오류x
   const { brand, fuelType, imageUrl, name, segment } = attribute || {};
   console.log(desc);
+
+  const segmentMap = {
+    C: "소형",
+    D: "중형",
+    E: "대형",
+    SUV: "SUV",
+  };
+
+  const executeSegment = segmentType => {
+    return segmentMap[segmentType];
+  };
+
+  const fuelMap = {
+    gasoline: "가솔린",
+    ev: "전기",
+    hybrid: "하이브리드",
+  };
+
+  const executeFuel = fuelType => {
+    return fuelMap[fuelType];
+  };
+
   const date = dayjs(startDate, "YYYY-MM-DD HH:mm:ss");
   const getDesc = useCallback(async () => {
     const result = await getCarList();
@@ -33,8 +54,8 @@ const Detail = () => {
     {
       name: "차량 정보",
       lists: [
-        { name: "차종", description: segment },
-        { name: "연료", description: fuelType },
+        { name: "차종", description: executeSegment(segment) },
+        { name: "연료", description: executeFuel(fuelType) },
         { name: "이용 가능일", description: date.format("YY년 MM월 DD일") },
       ],
     },
