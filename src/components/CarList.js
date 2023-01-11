@@ -1,21 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import { getCarList } from "../apis";
 import CarListItem from "./CarListItem";
 
-const CarList = () => {
-  const [cars, setCars] = useState([]);
-
-  const getCars = useCallback(async () => {
-    const result = await getCarList();
-    setCars(result.data.payload);
-  }, []);
-
-  useEffect(() => {
-    getCars();
-  }, [getCars]);
-
+const CarList = ({ cars }) => {
   return (
     <ListWrapper>
       {cars.map(data => {

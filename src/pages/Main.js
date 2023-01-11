@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 
+import { getCarList } from "../apis";
 import { SegmentTypeList, CarList } from "../components";
 
 const Main = () => {
+  const [cars, setCars] = useState([]);
+
+  const getCars = useCallback(async () => {
+    const result = await getCarList();
+    setCars(result.data.payload);
+  }, []);
+
+  useEffect(() => {
+    getCars();
+  }, [getCars]);
+
   return (
     <Container>
       <Header>전체차량</Header>
-      <SegmentTypeList />
-      <CarList />
+      <SegmentTypeList cars={cars} />
+      <CarList cars={cars} />
     </Container>
   );
 };

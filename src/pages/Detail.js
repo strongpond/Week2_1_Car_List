@@ -13,7 +13,6 @@ const Detail = () => {
   const { id } = params;
   const { amount, attribute, insurance, additionalProducts, startDate } = desc;
   const { brand, fuelType, imageUrl, name, segment } = attribute || {};
-  console.log(desc);
 
   const segmentMap = {
     C: "소형",

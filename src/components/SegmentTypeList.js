@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import SegmentType from "./SegmentType";
 
-const SegmentTypeList = () => {
+const SegmentTypeList = ({ cars }) => {
   const segment = ["전체", "대형", "중형", "소형", "SUV"];
   return (
     <SegmentTypeListBox>
