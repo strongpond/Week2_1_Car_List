@@ -2,12 +2,19 @@ import styled from "styled-components";
 
 import SegmentType from "./SegmentType";
 
-const SegmentTypeList = ({ cars }) => {
+const SegmentTypeList = ({ selectedSegment, onClickSegment }) => {
   const segment = ["전체", "대형", "중형", "소형", "SUV"];
   return (
     <SegmentTypeListBox>
       {segment.map(li => {
-        return <SegmentType name={li} />;
+        return (
+          <SegmentType
+            key={li}
+            name={li}
+            selectedSegment={selectedSegment}
+            onClickSegment={onClickSegment}
+          />
+        );
       })}
     </SegmentTypeListBox>
   );

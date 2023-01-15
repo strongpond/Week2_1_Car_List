@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 import { getCarList } from "../apis";
 import { SegmentTypeList, CarList } from "../components";
+import { executeSegment } from "../utils";
 
 const Main = () => {
   const [cars, setCars] = useState([]);
+  const [filteredList, setFilteredList] = useState(cars);
+  const [selectedSegment, setSelectedSegment] = useState("전체");
 
   const getCars = useCallback(async () => {
     const result = await getCarList();
@@ -16,11 +19,20 @@ const Main = () => {
     getCars();
   }, [getCars]);
 
+  const onClickSegment = e => {
+    setSelectedSegment(e.target.value);
+    setFilteredList(
+      e.target.value === "전체"
+        ? cars
+        : cars.filter(car => executeSegment(car.attribute.segment) === e.target.value)
+    );
+  };
+
   return (
     <Container>
       <Header>전체차량</Header>
-      <SegmentTypeList cars={cars} />
-      <CarList cars={cars} />
+      <SegmentTypeList selectedSegment={selectedSegment} onClickSegment={onClickSegment} />
+      <CarList cars={selectedSegment === "전체" ? cars : filteredList} />
     </Container>
   );
 };
@@ -33,6 +45,7 @@ const Container = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 390px;
+  height: 755px;
   border: 1px solid black;
 `;
 

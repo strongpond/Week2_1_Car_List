@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import styled from "styled-components";
 import { getCarList } from "../apis";
 import { ItemDesc } from "../components";
+import { executeSegment, executeFuel } from "../utils";
 
 const Detail = () => {
   const [desc, setDesc] = useState([]);
@@ -13,27 +14,6 @@ const Detail = () => {
   const { id } = params;
   const { amount, attribute, insurance, additionalProducts, startDate } = desc;
   const { brand, fuelType, imageUrl, name, segment } = attribute || {};
-
-  const segmentMap = {
-    C: "소형",
-    D: "중형",
-    E: "대형",
-    SUV: "SUV",
-  };
-
-  const executeSegment = segmentType => {
-    return segmentMap[segmentType];
-  };
-
-  const fuelMap = {
-    gasoline: "가솔린",
-    ev: "전기",
-    hybrid: "하이브리드",
-  };
-
-  const executeFuel = fuelType => {
-    return fuelMap[fuelType];
-  };
 
   const date = dayjs(startDate, "YYYY-MM-DD HH:mm:ss");
   const getDesc = useCallback(async () => {

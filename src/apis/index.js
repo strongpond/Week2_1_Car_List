@@ -10,7 +10,7 @@ const instance = axios.create({
 
 export const getCarList = async () => {
   try {
-    const response = await instance.get("/cars?segment=");
+    const response = await instance.get("/cars");
     return response;
   } catch (error) {
     return error;

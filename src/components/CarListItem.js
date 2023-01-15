@@ -1,29 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { executeSegment, executeFuel } from "../utils";
+
 const CarListItem = ({ id, brand, name, fuelType, segment, imageUrl, amount }) => {
-  //TODO: Mapping 함수 따로 분리하기
-  const segmentMap = {
-    C: "소형",
-    D: "중형",
-    E: "대형",
-    SUV: "SUV",
-  };
-
-  const executeSegment = segmentType => {
-    return segmentMap[segmentType];
-  };
-
-  const fuelMap = {
-    gasoline: "가솔린",
-    ev: "전기",
-    hybrid: "하이브리드",
-  };
-
-  const executeFuel = fuelType => {
-    return fuelMap[fuelType];
-  };
-
   const navigate = useNavigate();
 
   const goToDetail = selectId => {
