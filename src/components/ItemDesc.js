@@ -5,7 +5,7 @@ const ItemDesc = ({ lists }) => {
     <>
       {lists?.map(e => {
         return (
-          <DescWrapper>
+          <DescWrapper key={e.name}>
             <DescTitle>{e.name}</DescTitle>
             <DescValue>{e.description || e.amount}</DescValue>
           </DescWrapper>
