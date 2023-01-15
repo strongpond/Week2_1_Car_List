@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 import { getCarList } from "../apis";
+import { filteredListAtom, segmentAtom } from "../atoms";
 import { SegmentTypeList, CarList } from "../components";
 import { executeSegment } from "../utils";
 
 const Main = () => {
   const [cars, setCars] = useState([]);
-  const [filteredList, setFilteredList] = useState(cars);
-  const [selectedSegment, setSelectedSegment] = useState("전체");
+  const [filteredList, setFilteredList] = useRecoilState(filteredListAtom);
+  const [selectedSegment, setSelectedSegment] = useRecoilState(segmentAtom);
 
   const getCars = useCallback(async () => {
     const result = await getCarList();
