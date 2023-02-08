@@ -1,135 +1,79 @@
-# pre-onboarding-7th-2-1-2 
+# issue list
 
-## 폴더구조
+1. [프로젝트 소개 🚀](#1-프로젝트-소개-)
+2. [기술 스택 🛠](#2-기술-스택-)
+3. [구현 기능 📍](#3-구현-기능-)
+4. [프로젝트 구조 🗂](#4-프로젝트-구조-)
+5. [프로젝트 설치 및 실행 ✨](#5-프로젝트-설치-및-실행-)
 
-```
-📦src
- ┣ 📂apis
- ┃ ┗ 📜index.js
- ┣ 📂assets
- ┃ ┣ 📜GlobalStyle.js
- ┃ ┣ 📜index.js
- ┃ ┗ 📜theme.js
- ┣ 📂components
- ┃ ┣ 📜CarList.js
- ┃ ┣ 📜CarListItem.js
- ┃ ┣ 📜ItemDesc.js
- ┃ ┣ 📜SegmentType.js
- ┃ ┣ 📜SegmentTypeList.js
- ┃ ┗ 📜index.js
- ┣ 📂data
- ┃ ┗ 📜index.js
- ┣ 📂hooks
- ┣ 📂pages
- ┃ ┣ 📜Detail.js
- ┃ ┣ 📜Main.js
- ┃ ┗ 📜index.js
- ┣ 📂utils
- ┣ 📜App.js
- ┣ 📜config.js
- ┗ 📜index.js
-```
+<br/>
 
-## 활용코드
-
-### 자주 쓰는 공동 테마 customizing
-
-```javascript
-//theme.js
-const common = {
-  flexCenter: `
-    display: flex;
-    justify-contents: center;
-    align-items: center;
-  `,
-  flexCenterColumn: `
-    display: flex;
-    flex-direction: column;
-    justify-contents: center;
-    align-items: center;
-  `,
-};
-
-const fontSizes = {
-  title: "17px",
-  subtitle: "14px",
-  paragraph: "12px",
-  detailTitle: "24px",
-  detailSubtitle: "20px",
-};
-
-const colors = {
-  black: "#000000",
-  grey: "#D9D9D9",
-  white: "#ffffff",
-  skyblue: "#0094FF",
-};
-
-const theme = {
-  common,
-  fontSizes,
-  colors,
-};
-
-export default theme;
-```
-
-- 활용 예시
-```javascript
-const Header = styled.div`
-  ${({ theme }) => theme.common.flexCenter};
-  justify-content: center;
-  width: 390px;
-  padding: 20px 0;
-  color: black;
-  font-size: ${({ theme }) => theme.fontSizes.title};
-  font-weight: 700;
-  border-bottom: 1px solid black;
-`;
-```
+[🌍 배포 링크]()
 
 <br />
 
-### type에 따른 한글 mapping
+## 1. 프로젝트 소개 🚀
+
+- 개요 : 원티드 프론트엔드 프리온보딩 과제 중 Best Practice (**개인프로젝트**❗️)
+- 주제 : B2C 차량대여 서비스
+- 기간 : 2022.11.01 ~ 2022.11.03
+
+<br />
+
+## 2. 기술 스택 🛠
+
+- React
+- Javascript
+- Styled-Components
+- Recoil
+- Vercel(배포)
+
+<br />
+
+## 3. 구현 기능 📍
+
+- 차량 목록 페이지 구현
+- 차량 상세 페이지 구현
+- 뒤로가기 기능 (상세 to 목록)
+- Recoil을 활용한 필터링 상태관리
+
+<br />
+
+## 4. 프로젝트 구조 🗂
+
+```bash
+src
+├── apis  // cars 관련 api service 요청
+├── assets  // 전역 스타일링
+├── atoms  // 전역 상태관리 (Recoil)
+├── components  // 공용 컴포넌트
+├── data  // 차량 상세 formData
+├── pages // 페이지 및 페이지 고유 컴포넌트
+└── utils // data Type 관련 mapping 함수
 ```
-fuelType: "gasoline" | "hybrid" | "ev"
-segment: "C" | "D" | "E" | "SUV"
+
+<br/>
+
+<br>
+
+## 5. 프로젝트 설치 및 실행 ✨
+
+<br/>
+
+1. Git Clone
+
+```plaintext
+$ git clone https://github.com/strongpond/car-list.git
 ```
 
-```javascript
-const segmentMap = {
-    C: "소형",
-    D: "중형",
-    E: "대형",
-    SUV: "SUV",
-  };
+2. 프로젝트 패키지 설치
 
-  const executeSegment = segmentType => {
-    return segmentMap[segmentType];
-  };
-
-  const fuelMap = {
-    gasoline: "가솔린",
-    ev: "전기",
-    hybrid: "하이브리드",
-  };
-
-  const executeFuel = fuelType => {
-    return fuelMap[fuelType];
-  };
-```
-- 활용 예시
-```javascript
-//CarListItem.js
-  ...
-  <ItemType>
-      {executeSegment(segment)} / {executeFuel(fuelType)}
-  </ItemType>
+```plaintext
+$ npm install
 ```
 
-### TODO
+3. 프로젝트 실행
 
-- 클릭이벤트(filter) + 버튼 애니메이션
-- 신규 뱃지 추가
-- SEO
-- 배포
+```plaintext
+$ npm start
+```
